@@ -1,0 +1,22 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: rgba(0, 0, 255, 0.200);
+}
+
+nav {
+    background-color: rgba(0, 0, 255, 0.500);
+}
+
+nav span {
+    color: white;
+    letter-spacing: 2px;
+}
+
+.customCard img {
+    height: 200px;
+    object-fit: cover;
+    object-position: center;
+}
+
+
+
