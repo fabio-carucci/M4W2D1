@@ -31,23 +31,48 @@ function displayPhotos(url, artistName, alt) {
 
     cardBody.appendChild(cardTitle);
 }
+// displayPhotos("/assets/IMG_3290.jpeg", "Fabio Carucci", "Foto di montagna");
 
-displayPhotos("/assets/IMG_3290.jpeg", "Fabio Carucci", "Foto di montagna");
+let myBtn = document.getElementById('searchButton');
+let myInput = document.getElementById('searchInput');
 
-// let apiUrl = 'https://api.pexels.com/v1/search?query=surf&per_page=25';
-// let apiKey = 'E63GsAeMZVEyURzqIq42SBu7IaNTm5l1BDsVTcROhz87gyOnM3OS5FKX';
+function searchPhotos() {
+    if (myInput.value.trim() === '') {
+        alert('Inserisci un valore nell\'input prima di effettuare la ricerca.');
+        return; // Esce dalla funzione se l'input è vuoto
+    }
 
-// fetch(apiUrl, {
-//     method: 'GET',
-//     headers: {
-//         'Authorization': apiKey
-//     }
-// })
-//     .then(response => response.json())
-//     .then(data => {
-//         let photos = data.photos;
-//         photos.forEach(element => {
-//             displayPhotos(element.src.original, element.photographer, element.alt);
-//         });
-//     })
-//     .catch(error => console.error('Errore durante la richiesta:', error.message));
+    let elementsToRemove = document.querySelectorAll(".row > *");
+
+    if (elementsToRemove.length > 0) {
+        elementsToRemove.forEach(element => {
+            element.remove();
+        });
+    }
+
+    let apiUrl = `https://api.pexels.com/v1/search?query=${myInput.value}&per_page=25`;    
+    let apiKey = 'E63GsAeMZVEyURzqIq42SBu7IaNTm5l1BDsVTcROhz87gyOnM3OS5FKX';
+    
+    fetch(apiUrl, {
+        method: 'GET',
+        headers: {
+            'Authorization': apiKey
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            let photos = data.photos;
+            photos.forEach(element => {
+                displayPhotos(element.src.original, element.photographer, element.alt);
+            });
+        })
+        .catch(error => console.error('Errore durante la richiesta:', error.message));
+}
+
+myBtn.addEventListener("click", searchPhotos);
+
+myInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        searchPhotos();
+    }
+});

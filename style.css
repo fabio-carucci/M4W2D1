@@ -12,6 +12,29 @@ nav span {
     letter-spacing: 2px;
 }
 
+#searchButton {
+    background-color: rgba(0, 0, 255, 0.500);
+    color: white;
+    border: none;
+    border-radius: 0px 5px 5px 0px;
+    padding: 7px 15px;
+    transition: all 0.3s;
+}
+#customBtn:hover {
+    color: rgba(0, 0, 255, 0.5);
+    background-color: white;
+}
+
+#searchInput {
+    border: none;
+    border-radius: 5px 0px 0px 5px;
+    padding: 7px 15px;
+}
+
+#searchInput:focus {
+    outline: 2px solid rgba(0, 0, 255, 0.5);    
+}
+
 .customCard img {
     height: 200px;
     object-fit: cover;
